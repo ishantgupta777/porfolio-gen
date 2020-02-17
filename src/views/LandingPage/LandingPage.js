@@ -1,7 +1,7 @@
 import React from 'react';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
-import cookie from 'react-cookies'
+import cookie from 'react-cookies';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -47,18 +47,18 @@ export default function LandingPage(props) {
 	const [ loading, setLoading ] = React.useState(false);
 
 	const responseGoogle = (response) => {
-    // console.log(response.profileObj);
-    const {name,email} = response.profileObj
-    const userData = {
-      name,
-      email
-    }
-    cookie.save('user_data',userData)
+		// console.log(response.profileObj);
+		const { name, email } = response.profileObj;
+		const userData = {
+			name,
+			email
+		};
+		cookie.save('user_data', userData);
 		setEmail(response.profileObj.email);
 		const data = {
-			email: email,
-    };
-    
+			email: email
+		};
+
 		const json = JSON.stringify(data);
 		axios({
 			method: 'get',

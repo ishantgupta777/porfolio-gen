@@ -1,5 +1,5 @@
 import React from 'react';
-import cookie from 'react-cookies'
+import cookie from 'react-cookies';
 
 // @material-ui/core components
 import { makeStyles, withStyles, createMuiTheme } from '@material-ui/core/styles';
@@ -173,48 +173,44 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function ProductSection() {
 	const storage = firebase.storage();
 
-	const [data,setData] = React.useState(null)
+	const [ data, setData ] = React.useState(null);
 	React.useEffect(() => {
-		const email = cookie.load('user_data').email
-		console.log(email)
-		const getUserData = async()=>{
+		const email = cookie.load('user_data').email;
+		console.log(email);
+		const getUserData = async () => {
 			const res = await axios({
 				method: 'get',
-				url:
-					`https://cors-anywhere.herokuapp.com/https://3izwq346mb.execute-api.us-east-1.amazonaws.com/prod/portfolio?email=${email}`,
+				url: `https://cors-anywhere.herokuapp.com/https://3izwq346mb.execute-api.us-east-1.amazonaws.com/prod/portfolio?email=${email}`,
 				headers: {
 					'Access-Control-Allow-Origin': '*'
 				}
-			})
-			if(res.data.data!=undefined){
-				setData(res.data.data)
-				let data = res.data.data
-				setProfileName(data.profile_name)
-				setAboutMe(data.about_me)
-				setSkillDescription(data.skill_desc)
-				if(data.phone_no!='optional')
-				setPhoneNum(data.phone_no)
-				setLinkedIn(data.social.linkedin_url)
-				setGithub(data.social.github_url)
-				setProfile({
-					image: data.profile_pic_url,
-					progress: 100
-				});
-				setEmail(data.social.email)
-				setTwitter(data.social.twitter_url)
-				setStack(data.social.stackoverflow_url)
-				setCurrentLocation(data.current_location)
-				setSkills(data.skills)
-				setTests(data.testimonials)
-				setLangs(data.langs)
-				setPubs(data.publications)
-				setExps(data.experience)
-				setEdus(data.education)
-				setAchs(data.achievements)
-				setPros(data.projects)
+			});
+			if (res.data.data != undefined) {
+				setData(res.data.data);
+				let data = res.data.data;
+				setProfileName(data.profile_name);
+				setAboutMe(data.about_me);
+				setSkillDescription(data.skill_desc);
+				if (data.phone_no != 'optional') setPhoneNum(data.phone_no);
+				setLinkedIn(data.social.linkedin_url);
+				setGithub(data.social.github_url);
+				console.log(data.profile_pic_url);
+				setProfile({ imageURL: data.profile_pic_url });
+				setEmail(data.social.email);
+				setTwitter(data.social.twitter_url);
+				setStack(data.social.stackoverflow_url);
+				setCurrentLocation(data.current_location);
+				setSkills(data.skills);
+				setTests(data.testimonials);
+				setLangs(data.langs);
+				setPubs(data.publications);
+				setExps(data.experience);
+				setEdus(data.education);
+				setAchs(data.achievements);
+				setPros(data.projects);
 			}
-		}
-		getUserData()
+		};
+		getUserData();
 	}, []);
 
 	const classes = useStyles();
@@ -410,7 +406,6 @@ export default function ProductSection() {
 			});
 		} else setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	};
-
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
