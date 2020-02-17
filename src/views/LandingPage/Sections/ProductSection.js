@@ -416,11 +416,12 @@ export default function ProductSection() {
   }; */
 
 	const addSkill = () => {
+		var skillNum = skills.length + 1;
 		setSkills((oldArray) => {
 			return [
 				...oldArray,
 				{
-					id: skills[skills.length - 1].id + 1,
+					id: skillNum,
 					skill_name: '',
 					skill_level: 'Beginner'
 				}
